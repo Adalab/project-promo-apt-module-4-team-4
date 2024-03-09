@@ -38,7 +38,7 @@ function App() {
   }, [data]);
 
   const handleFetchCreate = () => {
-    fetch("https://dev.adalab.es/api/projectCard", {
+    fetch("https://localhost:3000/api/projectCard", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -71,7 +71,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/catalog" element={<Catalog data={data}/>} />
+          <Route path="/catalog" element={<Catalog data={data} />} />
           <Route
             path="/main"
             element={
