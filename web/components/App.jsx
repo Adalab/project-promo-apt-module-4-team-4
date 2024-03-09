@@ -12,16 +12,16 @@ import Catalog from "./Catalog";
 function App() {
   const [data, setData] = useState(
     get("data", {
-      name: "", // Nombre del proyecto
+      title: "", // Nombre del proyecto
       slogan: "", // Slogan del proyecto
       technologies: "", // Tecnologías
       repo: "", // Repo
       demo: "", // Demo
-      desc: "", // Descripción
+      description: "", // Descripción
       autor: "", // Nombre de la autora
       job: "", // Trabajo de la autora
-      photo: "", // Foto de la autora
-      image: "", // Foto del proyecto
+      image: "", // Foto de la autora
+      photo: "", // Foto del proyecto
     })
   );
 
@@ -38,7 +38,7 @@ function App() {
   }, [data]);
 
   const handleFetchCreate = () => {
-    fetch("https://localhost:3000/api/projectCard", {
+    fetch("//localhost:3000/api/projectCard", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },

@@ -53,6 +53,8 @@ server.listen(port, () => {
 server.post('/api/projectCard', async (req, res) => {
   // Datos vienen req.body
 
+  console.log(req.body);
+
   //1.conectar a lqa base de datos
 
   const conn = await getConnection();
@@ -65,17 +67,19 @@ VALUES (?, ?, ?)`;
 
 const [resultsInsertAuthor] = await conn.execute(
   insertAuthor, 
-  [req.body.name, req.body.job, req.body.image]);
+  [req.body.autor, req.body.job, req.body.image]);
 
   //3.recupero el id de Authors
 
   console.log(resultsInsertAuthor.insertId);
   const fkAuthor = resultsInsertAuthor.insertId;
 
+  console.log(fkAuthor);
+
   //4.insertar el proyecto. añadir fkauthor en project. el campo idauthor de la tabla author esta realcionado. dos inserts
 
 const insertProject = `
-INSERT projects (title, slogan, repo, demo, technologies, \`description\`, image, fkAuthor)
+INSERT project (title, slogan, repo, demo, technologies, \`description\`, image, fkAuthor)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const [resultsInsertProject] = await conn.execute(insertProject, [
@@ -85,7 +89,7 @@ INSERT projects (title, slogan, repo, demo, technologies, \`description\`, image
     req.body.demo,
     req.body.technologies,
     req.body.description,
-    req.body.image,
+    req.body.photo,
     fkAuthor,
   ]);
 
@@ -127,7 +131,7 @@ server.get("/projectCard/:id", async (req, res) => {
 const selectProjects = `
 SELECT *
     FROM author a
-        JOIN projects p ON (a.idAuthor = p.fkAuthor)
+        JOIN project p ON (a.idAuthor = p.fkAuthor)
     WHERE p.idProject = ?
 ;
 `;
