@@ -62,8 +62,8 @@ server.post('/api/projectCard', async (req, res) => {
   //2.insertar los datos de la autora Author
 
   const insertAuthor = `
-INSERT author (name, job, image)
-VALUES (?, ?, ?)`;
+    INSERT author (name, job, image)
+    VALUES (?, ?, ?)`;
 
 const [resultsInsertAuthor] = await conn.execute(
   insertAuthor, 
@@ -79,7 +79,7 @@ const [resultsInsertAuthor] = await conn.execute(
   //4.insertar el proyecto. añadir fkauthor en project. el campo idauthor de la tabla author esta realcionado. dos inserts
 
 const insertProject = `
-INSERT project (title, slogan, repo, demo, technologies, \`description\`, image, fkAuthor)
+INSERT project (title, slogan, repo, demo, technologies, description, image, fkAuthor)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const [resultsInsertProject] = await conn.execute(insertProject, [
@@ -110,11 +110,25 @@ INSERT project (title, slogan, repo, demo, technologies, \`description\`, image,
 });
 
 // API listar proyectos
-server.get("/api/projectCard", (req, res) => {
+server.get('/api/projectCard', async (req, res) => {
+
   //1. Conectar con la BD
   //2. Lancar SELECT para recuperar todos los proyectos de la BD
   //3. Cierro conexion
   //4. Devuelvo un json con los resultados
+
+  const connection = await getConnection();
+
+  const sql = "SELECT * FROM project";  
+
+  const [results] = await connection.query(sql);
+
+  res.json({
+    success: true,
+    movies: results,
+  });
+  connection.end();
+
 });
 
 
