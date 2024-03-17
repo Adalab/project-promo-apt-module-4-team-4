@@ -38,7 +38,7 @@ function App() {
   }, [data]);
 
   const handleFetchCreate = () => {
-    fetch("//localhost:3000/api/projectCard", {
+    fetch("/api/projectCard", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
