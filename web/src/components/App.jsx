@@ -33,6 +33,8 @@ function App() {
 
   const [responseFetch, setResponseFetch] = useState("");
 
+  const [responseFetchCatalog, setResponseFetchCatalog] = useState("");
+
   useEffect(() => {
     set("data", data);
   }, [data]);
@@ -48,6 +50,24 @@ function App() {
         setResponseFetch(dataResponse);
       });
   };
+
+  const handleFetchCatalog = () => {
+    fetch("/api/projectCard"),
+      {}
+        .then((response) => response.json())
+        .then((dataResponse) => {
+          setResponseFetchCatalog(dataResponse);
+        });
+  };
+
+  async function loadData() {
+    const response = await fetch("http://localhost:3000/api/pets");
+    const data = await response.json();
+    console.log(data);
+    petsArray = data.results;
+    renderAllPets();
+  }
+  loadData();
 
   const updateAvatarAuthor = (photo) => {
     const clonData = { ...data };
@@ -71,7 +91,15 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/catalog" element={<Catalog data={data} />} />
+          <Route
+            path="/catalog"
+            element={
+              <Catalog
+                responseFetchCatalog={responseFetchCatalog}
+                handleFetchCatalog={handleFetchCatalog}
+              />
+            }
+          />
           <Route
             path="/main"
             element={
