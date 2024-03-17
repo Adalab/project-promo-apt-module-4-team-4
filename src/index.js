@@ -111,13 +111,19 @@ server.post("/api/projectCard", async (req, res) => {
 
 // API listar proyectos
 server.get("/api/projectCard", async (req, res) => {
+
+  console.log(req.query)
   //1. Conectar con la BD
 
   const connection = await getConnection();
 
   //2. Lancar SELECT para recuperar todos los proyectos de la BD
 
-  const sql = "SELECT * FROM project";
+  const sql = `
+  SELECT *
+      FROM author a
+      JOIN project p ON (a.idusers = p.fkAuthor)
+ `;
   const [results] = await connection.query(sql);
 
   //3. Cierro conexion

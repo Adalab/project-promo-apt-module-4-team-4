@@ -19,7 +19,7 @@ function Info({ changeData, data }) {
           id="name"
           placeholder="Nombre del proyecto"
           onChange={handleChange}
-          value={data.name}
+          value={data.title}
         />
         <InputText
           changeData={changeData}
