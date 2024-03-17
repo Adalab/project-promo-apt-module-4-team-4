@@ -4,7 +4,7 @@
 
 const express = require("express");
 const cors = require("cors");
-const path = require ('path');
+const path = require("path");
 
 const mysql = require("mysql2/promise");
 require("dotenv").config();
@@ -14,17 +14,15 @@ require("dotenv").config();
 const server = express();
 const port = 3000; // 1025 - 65365
 
-
 //CONFIGURACIÓN
 
 server.use(cors());
-server.use(express.json({limit: '25mb'}));
-server.set('view engine', 'ejs');
+server.use(express.json({ limit: "25mb" }));
+server.set("view engine", "ejs");
 
 //CONFIGURACIÓN DE MYSQL
 
 async function getConnection() {
-
   const connection = await mysql.createConnection({
     host: process.env.MYSQL_HOST,
     database: process.env.MYSQL_DB,
@@ -50,7 +48,7 @@ server.listen(port, () => {
 // ENDPOINTS
 
 //Crear projectos
-server.post('/api/projectCard', async (req, res) => {
+server.post("/api/projectCard", async (req, res) => {
   // Datos vienen req.body
 
   console.log(req.body);
@@ -65,9 +63,11 @@ server.post('/api/projectCard', async (req, res) => {
     INSERT author (name, job, image)
     VALUES (?, ?, ?)`;
 
-const [resultsInsertAuthor] = await conn.execute(
-  insertAuthor, 
-  [req.body.autor, req.body.job, req.body.image]);
+  const [resultsInsertAuthor] = await conn.execute(insertAuthor, [
+    req.body.autor,
+    req.body.job,
+    req.body.image,
+  ]);
 
   //3.recupero el id de Authors
 
@@ -78,9 +78,9 @@ const [resultsInsertAuthor] = await conn.execute(
 
   //4.insertar el proyecto. añadir fkauthor en project. el campo idauthor de la tabla author esta realcionado. dos inserts
 
-const insertProject = `
-INSERT project (title, slogan, repo, demo, technologies, description, image, fkAuthor)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+  const insertProject = `
+  INSERT project (title, slogan, repo, demo, technologies, description, image, fkAuthor)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const [resultsInsertProject] = await conn.execute(insertProject, [
     req.body.title,
@@ -95,7 +95,7 @@ INSERT project (title, slogan, repo, demo, technologies, description, image, fkA
 
   //5.Recupero el id de project
 
-  const idProject = resultsInsertProject.insertId
+  const idProject = resultsInsertProject.insertId;
 
   //6.cierro la conexión
 
@@ -110,45 +110,45 @@ INSERT project (title, slogan, repo, demo, technologies, description, image, fkA
 });
 
 // API listar proyectos
-server.get('/api/projectCard', async (req, res) => {
-
+server.get("/api/projectCard", async (req, res) => {
   //1. Conectar con la BD
-  //2. Lancar SELECT para recuperar todos los proyectos de la BD
-  //3. Cierro conexion
-  //4. Devuelvo un json con los resultados
 
   const connection = await getConnection();
 
-  const sql = "SELECT * FROM project";  
+  //2. Lancar SELECT para recuperar todos los proyectos de la BD
 
+  const sql = "SELECT * FROM project";
   const [results] = await connection.query(sql);
+
+  //3. Cierro conexion
+
+  connection.end();
+
+  //4. Devuelvo un json con los resultados
 
   res.json({
     success: true,
-    movies: results,
+    projects: results,
   });
-  connection.end();
-
 });
-
 
 //Mostrar detalle projecto (servidor de dinámicos)
 server.get("/projectCard/:id", async (req, res) => {
   // Recibo el id del proyecto en un URL param
-
   //1. Conectar con la BD
 
   const conn = await getConnection();
 
   //2. Lanzar SELECT para recuperar 1 proyecto con el id <- req.params
 
-const selectProjects = `
-SELECT *
-    FROM author a
-        JOIN project p ON (a.idAuthor = p.fkAuthor)
-    WHERE p.idProject = ?
-;
-`;
+  const selectProjects = `
+  SELECT *
+      FROM author a
+          JOIN project p ON (a.idusers = p.fkAuthor)
+      WHERE p.idproject = ?
+  ;
+  `;
+
   const [results] = await conn.query(selectProjects, [req.params.id]);
 
   //3. Hago un template (EJS)
@@ -157,12 +157,10 @@ SELECT *
 
   conn.end();
 
-  //5. res.render ('plantiilla', resultado)
+  //5. res.render ('plantilla', resultado)
 
-  const data = results [0];
-
-  res.render(`detail`, data);
-
+  const data = results[0];
+  res.render("detail", data);
 });
 
 /*async function api() {
@@ -172,5 +170,8 @@ SELECT *
 
 // SERVIDOR ESTÁTICOS
 
-const staticServerPathWeb = '../public'; // En esta carpeta (en la raíz del proy) ponemos los ficheros estáticos
+const staticServerPathWeb = "../public"; // En esta carpeta (en la raíz del proy) ponemos los ficheros estáticos
 server.use(express.static(path.join(__dirname, staticServerPathWeb)));
+
+const pathServerPublicStyles = './src/public-css';
+server.use(express.static(pathServerPublicStyles));

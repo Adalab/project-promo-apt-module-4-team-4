@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyectos Molones</title>
+    <link rel="stylesheet" href="/main.css" />
 </head>
 
 <body>
     <main class="mainLanding">
         <div class="mainLanding__container">
-            <h1 class="mainLanding__container__title">Proyectos Molones</h1>
+            <h1 class="mainLanding__container__title">Proyectos molones</h1>
             <p class="mainLanding__container__subtitle">
                 Escaparate en línea para recoger ideas a través de la tecnología.
             </p>
@@ -23,19 +24,19 @@
                     <p class="preview__autor__info-project--subtitle">
                         Proyectos Molones
                     </p>
-                    <h2 class="preview__autor__info-project--title">Hola</h2>
-                    <p class="preview__autor__info-project--slogan">Hola</p>
-                    <p class="preview__autor__info-project--desc">Hola</p>
+                    <h2 class="preview__autor__info-project--title"><%= title %></h2>
+                    <p class="preview__autor__info-project--slogan"><%= slogan %></p>
+                    <p class="preview__autor__info-project--desc"><%= description %></p>
                     <div class="preview__autor__info-project--technologies">
                         <p class="preview__autor__info-project--technologies--text">
-                            Hola
+                            <%= technologies %>
                         </p>
                     </div>
                     <div class="preview__autor__info-project--icons">
-                        <a class="cardLink" href="Hola" target="_blank">
+                        <a class="cardLink" href="<%= repo %>" target="_blank">
                             <i class="fa-brands fa-github-alt" aria-hidden="true"></i>
                         </a>
-                        <a class="cardLink" href="Hola" target="_blank">
+                        <a class="cardLink" href="<%= demo %>" target="_blank">
                             <i class="fa-solid fa-globe" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -44,8 +45,8 @@
                 <div class="preview__autor__info-autor">
                     <img class="preview__autor__info-autor--image" src="" alt="">
 
-                    <p class="preview__autor__info-autor--job">Hola</p>
-                    <p class="preview__autor__info-autor--name">Hola</p>
+                    <p class="preview__autor__info-autor--job"><%= job %></p>
+                    <p class="preview__autor__info-autor--name"><%= name %></p>
                 </div>
             </article>
         </section>

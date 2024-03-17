@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "npx nodemon src/index.js"
+    "dev": "npx nodemon src/index.js",
+    "publish-react": "cd web && npm run build && cd .. && rm -rf ../public && mv ./web/dist ../public"
   },
   "repository": {
     "type": "git",
