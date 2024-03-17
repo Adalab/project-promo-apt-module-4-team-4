@@ -12,11 +12,11 @@ function Author({ changeData, data }) {
       <InputText
         changeData={changeData}
         data={data}
-        name="autor"
-        id="autor"
+        name="name"
+        id="name"
         placeholder="Nombre"
         onChange={handleChange}
-        value={data.autor}
+        value={data.name}
       />
       <InputText
         changeData={changeData}

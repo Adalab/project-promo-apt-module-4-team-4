@@ -15,8 +15,8 @@ function Info({ changeData, data }) {
         <InputText
           changeData={changeData}
           data={data}
-          name="name"
-          id="name"
+          name="title"
+          id="title"
           placeholder="Nombre del proyecto"
           onChange={handleChange}
           value={data.title}
@@ -62,12 +62,12 @@ function Info({ changeData, data }) {
         <textarea
           className="addForm__input"
           type="text"
-          name="desc"
-          id="desc"
+          name="description"
+          id="description"
           placeholder="Descripción"
           rows="5"
           onChange={handleChange}
-          value={data.desc}
+          value={data.description}
         ></textarea>
       </fieldset>
     </>

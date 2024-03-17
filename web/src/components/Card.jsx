@@ -12,15 +12,15 @@ function Card({ data }) {
       <div className="card__author">
         <div className="card__authorPhoto" style= {{ backgroundImage: `url(${data.photo || defaultPhoto })` }}></div>
         <p className="card__job">{data.job || "Full stack Developer"}</p>
-        <h3 className="card__name">{data.autor || "Emmelie Bjôrklund"}</h3>
+        <h3 className="card__name">{data.name || "Emmelie Bjôrklund"}</h3>
       </div>
 
       <div className="card__project">
-        <h3 className="card__name">{data.name || "Elegant Workspace"}</h3>
+        <h3 className="card__name">{data.title || "Elegant Workspace"}</h3>
         <p className="card__slogan">{data.slogan || "Diseños Exclusivos"}</p>
         <h3 className="card__descriptionTitle">Product description</h3>
         <p className="card__description">
-          {data.desc ||
+          {data.description ||
             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, quosItaque, molestias eveniet laudantium adipisci vitae ratione"}
         </p>
 

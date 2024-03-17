@@ -18,7 +18,7 @@ function App() {
       repo: "", // Repo
       demo: "", // Demo
       description: "", // Descripción
-      autor: "", // Nombre de la autora
+      name: "", // Nombre de la autora
       job: "", // Trabajo de la autora
       image: "", // Foto de la autora
       photo: "", // Foto del proyecto
@@ -32,8 +32,7 @@ function App() {
   };
 
   const [responseFetch, setResponseFetch] = useState("");
-
-  const [responseFetchCatalog, setResponseFetchCatalog] = useState("");
+  const [responseFetchCatalog, setResponseFetchCatalog] = useState(undefined);
 
   useEffect(() => {
     set("data", data);
@@ -51,23 +50,18 @@ function App() {
       });
   };
 
-  const handleFetchCatalog = () => {
-    fetch("/api/projectCard"),
-      {}
-        .then((response) => response.json())
-        .then((dataResponse) => {
-          setResponseFetchCatalog(dataResponse);
-        });
-  };
+  useEffect(() => {
+    const handleFetchCatalog = async () => {
+      const response = await fetch("/api/projectCard");
+      const data = await response.json();
 
-  async function loadData() {
-    const response = await fetch("http://localhost:3000/api/pets");
-    const data = await response.json();
-    console.log(data);
-    petsArray = data.results;
-    renderAllPets();
-  }
-  loadData();
+      console.log(data);
+
+      setResponseFetchCatalog(data.projects);
+    };
+
+    handleFetchCatalog();
+  }, []);
 
   const updateAvatarAuthor = (photo) => {
     const clonData = { ...data };
@@ -96,7 +90,6 @@ function App() {
             element={
               <Catalog
                 responseFetchCatalog={responseFetchCatalog}
-                handleFetchCatalog={handleFetchCatalog}
               />
             }
           />

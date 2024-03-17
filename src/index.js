@@ -51,7 +51,7 @@ server.listen(port, () => {
 server.post("/api/projectCard", async (req, res) => {
   // Datos vienen req.body
 
-  console.log(req.body);
+  // console.log(req.body);
 
   //1.conectar a lqa base de datos
 
@@ -64,17 +64,17 @@ server.post("/api/projectCard", async (req, res) => {
     VALUES (?, ?, ?)`;
 
   const [resultsInsertAuthor] = await conn.execute(insertAuthor, [
-    req.body.autor,
+    req.body.name,
     req.body.job,
     req.body.image,
   ]);
 
   //3.recupero el id de Authors
 
-  console.log(resultsInsertAuthor.insertId);
+  //console.log(resultsInsertAuthor.insertId);
   const fkAuthor = resultsInsertAuthor.insertId;
 
-  console.log(fkAuthor);
+  //console.log(fkAuthor);
 
   //4.insertar el proyecto. añadir fkauthor en project. el campo idauthor de la tabla author esta realcionado. dos inserts
 
@@ -112,7 +112,7 @@ server.post("/api/projectCard", async (req, res) => {
 // API listar proyectos
 server.get("/api/projectCard", async (req, res) => {
 
-  console.log(req.query)
+  //console.log(req.query)
   //1. Conectar con la BD
 
   const connection = await getConnection();
