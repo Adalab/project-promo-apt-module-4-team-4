@@ -12,7 +12,7 @@ if (hostname === "localhost") {
   basename = "/";
 } else {
   // Si el hostname no es localhost, se asume que es el dominio de producción
-  basename = "//project-promo-apt-module-4-team-4.onrender.com"; // Cambia a la ruta correspondiente en tu dominio de producción
+  basename = "/project-promo-apt-module-4-team-4.onrender.com"; // Cambia a la ruta correspondiente en tu dominio de producción
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
