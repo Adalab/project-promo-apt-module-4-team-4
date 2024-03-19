@@ -103,9 +103,12 @@ server.post("/api/projectCard", async (req, res) => {
 
   //7.devuelvo el json
 
+  const baseURL = process.env.NODE_ENV === 'production' ? 
+  'https://project-promo-apt-module-4-team-4.onrender.com/' : 'http://localhost:3000';
+
   res.json({
     success: true,
-    cardURL: `http://localhost:${port}/projectCard/${idProject}`,
+    cardURL: `${baseURL}/projectCard/${idProject}`,
   });
 });
 

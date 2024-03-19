@@ -4,6 +4,7 @@ import defaultPhoto from '../images/avatar.webp';
 
 function Card({ data }) {
   return (
+    <a href={`/projectCard/${data.idproject}`}>
     <article className="card">
       <h2 className="card__projectTitle">
         <span className="card__projectTitle--text">Personal project card</span>
@@ -50,6 +51,7 @@ function Card({ data }) {
         </div>
       </div>
     </article>
+    </a>
   );
 }
 

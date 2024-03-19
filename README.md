@@ -32,12 +32,13 @@ El equipo full stack responsable de este proyecto ha creado su propio servidor y
 - Conexión a Internet para cargar las librerías y recursos externos de React.
 
 ### Instalación
+
 1. Clona este repositorio:
    ```bash
    git clone https://github.com/Adalab/project-promo-apt-module-4-team-4.git
    cd project-promo-apt-module-4-team-4
 
-### Authors
+### Autoras
 
 - [@larafdezmorena](https://www.github.com/larafdezmorena)
 - [@esgab](https://www.github.com/esgab)
