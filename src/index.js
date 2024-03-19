@@ -172,6 +172,8 @@ server.get("/projectCard/:id", async (req, res) => {
   res.render("detail", data);
 });
 
+
+
 /*async function api() {
   const resp = await fetch("");
   const data = await resp.json();
@@ -187,3 +189,8 @@ server.use(express.static(pathServerPublicStyles));
 
 const pathServerPublicImages = './src/public-images';
 server.use(express.static(pathServerPublicImages));
+
+// Ruta de redirección para todas las demás solicitudes
+server.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, staticServerPathWeb, "index.html"));
+});
