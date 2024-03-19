@@ -473,24 +473,29 @@ fieldset {
   background-image: url("../images/icons/github.svg");
 }
 
+.landing {
+  height: 72vh;
+  @media screen and (min-width: 768px) {
+    padding: 0 0 10vh;
+  }
+}
+
 .home-page-container {
-  min-height: 70vh; /* Establece la altura del contenedor al 100% de la altura de la ventana del navegador */
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center; 
-  padding: 0 0 5vh;
   
   @media screen and (min-width: 768px) {
     max-width: 65vw;
-    padding: 0 0 20vh;
+    padding: 0 0 10vh;
   }
 }
 
 .homepage {
   &__card {
-    height: 60vh;
+    flex-grow: 1;
     border: 1px solid white;
     padding: 5%;
     display: flex;

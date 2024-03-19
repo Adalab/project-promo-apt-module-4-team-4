@@ -60,13 +60,13 @@ server.post("/api/projectCard", async (req, res) => {
   //2.insertar los datos de la autora Author
 
   const insertAuthor = `
-    INSERT author (name, job, image)
+    INSERT author (name, job, photo)
     VALUES (?, ?, ?)`;
 
   const [resultsInsertAuthor] = await conn.execute(insertAuthor, [
     req.body.name,
     req.body.job,
-    req.body.image,
+    req.body.photo,
   ]);
 
   //3.recupero el id de Authors
@@ -89,7 +89,7 @@ server.post("/api/projectCard", async (req, res) => {
     req.body.demo,
     req.body.technologies,
     req.body.description,
-    req.body.photo,
+    req.body.image,
     fkAuthor,
   ]);
 
@@ -104,7 +104,7 @@ server.post("/api/projectCard", async (req, res) => {
   //7.devuelvo el json
 
   res.json({
-    sucess: true,
+    success: true,
     cardURL: `http://localhost:${port}/projectCard/${idProject}`,
   });
 });
@@ -181,3 +181,6 @@ server.use(express.static(path.join(__dirname, staticServerPathWeb)));
 
 const pathServerPublicStyles = './src/public-css';
 server.use(express.static(pathServerPublicStyles));
+
+const pathServerPublicImages = './src/public-images';
+server.use(express.static(pathServerPublicImages));

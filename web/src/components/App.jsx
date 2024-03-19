@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     const handleFetchCatalog = async () => {
-      const response = await fetch("/api/projectCard");
+      const response = await fetch(process.env.NODE_ENV === "production" ? "/api/projectCard" : "//localhost:3000/api/projectCard");
       const data = await response.json();
 
       console.log(data);

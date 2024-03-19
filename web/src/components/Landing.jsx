@@ -4,7 +4,7 @@ function Landing() {
 
   
   return (
-    <div className="home-page-container homepage">
+    <div className="home-page-container homepage landing">
       <div className="homepage__card">
         <h1 className="homepage__title title">Proyectos molones</h1> 
         <p className="homepage__description">Escaparate en línea para recoger ideas a través de la tecnología.</p> 
